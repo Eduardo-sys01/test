@@ -565,25 +565,53 @@
   function drawWalls() {
     for (const wall of WALLS) {
       const [x, y] = wall.split(",").map(Number);
-      const left = x * CELL + 6;
-      const top = y * CELL + 4;
-      ctx.fillStyle = "#0e1835";
-      rounded(left + 3, top + 6, 42, 43, 8);
-      ctx.fillStyle = "#ff8266";
-      rounded(left, top, 42, 42, 8);
-      ctx.strokeStyle = "#122042";
-      ctx.lineWidth = 3;
-      ctx.stroke();
-      ctx.fillStyle = "#ffc09b";
-      rounded(left + 5, top + 5, 32, 14, 4);
-      ctx.fillStyle = "#ffe35b";
-      rounded(left + 9, top + 26, 24, 7, 2);
-      ctx.fillStyle = "#1b2140";
-      for (const offset of [8, 34]) {
-        ctx.beginPath();
-        ctx.arc(left + offset, top + 35, 2.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      const left = x * CELL + 7;
+      const top = y * CELL + 6;
+      const points = [
+        [left + 7, top + 39], [left + 4, top + 25], [left + 11, top + 12],
+        [left + 25, top + 5], [left + 39, top + 12], [left + 43, top + 27],
+        [left + 34, top + 41], [left + 19, top + 44]
+      ];
+
+      ctx.save();
+      ctx.translate(3, 5);
+      ctx.fillStyle = "#9b6d45";
+      ctx.beginPath();
+      points.forEach(([pointX, pointY], index) => index ? ctx.lineTo(pointX, pointY) : ctx.moveTo(pointX, pointY));
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+
+      ctx.fillStyle = "#d5a66f";
+      ctx.beginPath();
+      points.forEach(([pointX, pointY], index) => index ? ctx.lineTo(pointX, pointY) : ctx.moveTo(pointX, pointY));
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "#f0c994";
+      ctx.beginPath();
+      ctx.moveTo(left + 11, top + 13);
+      ctx.lineTo(left + 25, top + 6);
+      ctx.lineTo(left + 34, top + 13);
+      ctx.lineTo(left + 20, top + 18);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "#b77e4f";
+      ctx.beginPath();
+      ctx.moveTo(left + 20, top + 19);
+      ctx.lineTo(left + 34, top + 13);
+      ctx.lineTo(left + 41, top + 27);
+      ctx.lineTo(left + 33, top + 38);
+      ctx.lineTo(left + 18, top + 35);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "#fff0c2";
+      ctx.beginPath();
+      ctx.arc(left + 13, top + 29, 2.5, 0, Math.PI * 2);
+      ctx.arc(left + 29, top + 25, 1.8, 0, Math.PI * 2);
+      ctx.fill();
     }
   }
 
