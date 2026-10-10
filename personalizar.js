@@ -7,5 +7,5 @@ window.PERSONALIZAR = {
   mensajeFinal: "¡Tiempo!",
   colorEstrellas: "#ffe35b",
   colorMapa: "#1d2648",
-  coloresJugadores: ["#ff6b57", "#78e4d5", "#b999ff", "#ffc266", "#81b7ff", "#d8f26a"]
+  coloresJugadores: ["#ef6f61", "#22b8ad", "#f2a93b", "#8b6bd9", "#f48fb1", "#4e9fd1"]
 };

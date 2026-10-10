@@ -624,6 +624,10 @@
     const cy = sprite.y * CELL + CELL / 2 + Math.sin(time / 250 + index) * 1.5;
     const color = playerColor(Number(player.color) || 0);
 
+    const skin = ["#f7c69d", "#e8a875", "#ffd7ae", "#c98255"][index % 4];
+    const shade = ["#e95d5d", "#f4a62a", "#3bb7aa", "#7757c7"][index % 4];
+    const hatBand = playerColor(Number(player.color) || 0);
+
     ctx.fillStyle = "#08132999";
     ctx.beginPath(); ctx.ellipse(cx, cy + 19, 19, 5, 0, 0, Math.PI * 2); ctx.fill();
     if (uid === state.uid) {
@@ -634,31 +638,82 @@
       ctx.beginPath(); ctx.arc(cx, cy + 1, 24, 0, Math.PI * 2); ctx.stroke();
       ctx.restore();
     }
-    ctx.fillStyle = "#15203e";
+
+    // Chanclas y piernas.
+    ctx.fillStyle = "#172848";
     rounded(cx - 14, cy + 12, 10, 11, 3);
     rounded(cx + 4, cy + 12, 10, 11, 3);
-    ctx.fillStyle = "#15203e";
-    rounded(cx - 23, cy - 9, 10, 25, 4);
+    ctx.fillStyle = skin;
+    rounded(cx - 12, cy + 9, 7, 10, 3);
+    rounded(cx + 5, cy + 9, 7, 10, 3);
+    ctx.strokeStyle = "#172848";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx - 12, cy + 13); ctx.lineTo(cx - 5, cy + 17);
+    ctx.moveTo(cx + 5, cy + 17); ctx.lineTo(cx + 12, cy + 13);
+    ctx.stroke();
+
+    // Brazos descubiertos.
+    ctx.fillStyle = skin;
+    rounded(cx - 23, cy - 8, 10, 24, 4);
+    rounded(cx + 13, cy - 8, 10, 24, 4);
     ctx.fillStyle = color;
-    rounded(cx - 20, cy - 6, 8, 19, 3);
-    ctx.strokeStyle = "#15203e";
-    ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(cx, cy - 16); ctx.lineTo(cx, cy - 24); ctx.stroke();
-    ctx.fillStyle = "#ffe35b";
-    ctx.beginPath(); ctx.arc(cx, cy - 25, 4, 0, Math.PI * 2); ctx.fill();
+    rounded(cx - 20, cy - 5, 6, 10, 2);
+    rounded(cx + 14, cy - 5, 6, 10, 2);
+
+    // Camiseta de baño con detalle tropical.
     ctx.fillStyle = color;
-    rounded(cx - 17, cy - 18, 34, 36, 11);
+    rounded(cx - 17, cy - 5, 34, 23, 8);
+    ctx.fillStyle = shade;
+    ctx.beginPath();
+    ctx.moveTo(cx - 14, cy + 3); ctx.lineTo(cx - 5, cy - 5); ctx.lineTo(cx + 2, cy + 3);
+    ctx.lineTo(cx + 10, cy - 5); ctx.lineTo(cx + 15, cy + 2); ctx.lineTo(cx + 15, cy + 17);
+    ctx.lineTo(cx - 14, cy + 17); ctx.closePath(); ctx.fill();
     ctx.strokeStyle = "#15203e";
     ctx.lineWidth = 3;
     ctx.stroke();
+
+    // Cara y cuello.
+    ctx.fillStyle = skin;
+    rounded(cx - 13, cy - 25, 26, 28, 10);
+    rounded(cx - 4, cy - 1, 8, 7, 2);
+
+    // Gafas de sol.
     ctx.fillStyle = "#172848";
-    rounded(cx - 14, cy - 9, 28, 16, 7);
-    ctx.fillStyle = "#a8eeff";
-    rounded(cx - 11, cy - 7, 22, 11, 5);
-    ctx.fillStyle = "#ffffffcc";
-    rounded(cx - 8, cy - 5, 10, 3, 2);
-    ctx.fillStyle = "#fff7d2";
-    ctx.beginPath(); ctx.arc(cx, cy + 11, 2.5, 0, Math.PI * 2); ctx.fill();
+    rounded(cx - 12, cy - 18, 10, 7, 3);
+    rounded(cx + 2, cy - 18, 10, 7, 3);
+    ctx.fillRect(cx - 2, cy - 16, 4, 2);
+    ctx.fillStyle = "#8ee9df";
+    rounded(cx - 10, cy - 17, 7, 4, 2);
+    rounded(cx + 3, cy - 17, 7, 4, 2);
+
+    // Sombrero de playa.
+    ctx.fillStyle = "#f6d98b";
+    ctx.beginPath();
+    ctx.ellipse(cx, cy - 25, 22, 7, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#15203e";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.fillStyle = "#e5b95f";
+    rounded(cx - 12, cy - 36, 24, 13, 5);
+    ctx.strokeStyle = "#15203e";
+    ctx.stroke();
+    ctx.fillStyle = hatBand;
+    ctx.fillRect(cx - 12, cy - 28, 24, 4);
+
+    // Flor tropical.
+    ctx.fillStyle = "#ff6b57";
+    for (let petal = 0; petal < 5; petal++) {
+      const angle = petal * Math.PI * 2 / 5;
+      ctx.beginPath();
+      ctx.arc(cx + Math.cos(angle) * 5, cy - 32 + Math.sin(angle) * 5, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.fillStyle = "#ffe35b";
+    ctx.beginPath();
+    ctx.arc(cx, cy - 32, 2.5, 0, Math.PI * 2);
+    ctx.fill();
 
     const label = String(player.name || "Jugador").slice(0, 10);
     ctx.font = "700 10px 'Space Mono', monospace";
