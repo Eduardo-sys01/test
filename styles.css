@@ -475,8 +475,6 @@ canvas {
 .win-message > span { font-size: 1.25rem; letter-spacing: .2em; }
 .win-message h2 { margin: 7px 0; }
 .win-message p { margin: 0 0 18px; line-height: 1.4; }
-.giscus-container { min-height: 160px; overflow-wrap: anywhere; }
-#giscus-pending { padding: 16px; border: 2px dashed var(--ink); border-radius: 4px; line-height: 1.45; }
 .notice { min-height: 24px; margin-top: 20px; color: var(--blue); font-weight: 800; }
 .footer {
   display: flex; justify-content: space-between; gap: 15px;
