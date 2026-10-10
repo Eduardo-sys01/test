@@ -31,7 +31,7 @@
   let auth = null;
   let animationId = null;
   let busy = false;
-  let activeDrawer = null;
+  let activeDrawer = false;
 
   function firebaseSettings() {
     return typeof firebaseConfig !== "undefined" ? firebaseConfig : (window.FIREBASE_CONFIG || {});
@@ -487,47 +487,18 @@
   function closeDrawer(returnFocus = true) {
     $("game-drawer").hidden = true;
     $("drawer-backdrop").hidden = true;
-    for (const id of ["players", "comments"]) $(`toggle-${id}`).setAttribute("aria-expanded", "false");
-    if (returnFocus && activeDrawer) $(`toggle-${activeDrawer}`).focus();
-    activeDrawer = null;
+    $("toggle-players").setAttribute("aria-expanded", "false");
+    if (returnFocus && activeDrawer) $("toggle-players").focus();
+    activeDrawer = false;
   }
 
-  function showDrawer(panel) {
-    if (activeDrawer === panel) { closeDrawer(); return; }
-    activeDrawer = panel;
+  function showDrawer() {
+    if (activeDrawer) { closeDrawer(); return; }
+    activeDrawer = true;
     $("game-drawer").hidden = false;
     $("drawer-backdrop").hidden = false;
-    for (const id of ["players", "comments"]) {
-      $(`${id}-panel`).hidden = id !== panel;
-      $(`toggle-${id}`).setAttribute("aria-expanded", String(id === panel));
-    }
-    $("drawer-title").textContent = { players: "Jugadores", comments: "Comentarios" }[panel];
+    $("toggle-players").setAttribute("aria-expanded", "true");
     $("close-drawer").focus();
-    if (panel === "comments") loadGiscus();
-  }
-
-  function loadGiscus() {
-    const config = window.GISCUS_CONFIG || {};
-    if (!config.repo || !config.repoId || !config.category || !config.categoryId) return;
-    const container = $("giscus-container");
-    if (container.querySelector("script")) return;
-    $("giscus-pending").hidden = true;
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    const attributes = {
-      repo: config.repo, "repo-id": config.repoId, category: config.category,
-      "category-id": config.categoryId, mapping: "specific", term: "Comentarios de Caza estrellas",
-      strict: "0", "reactions-enabled": "1", "emit-metadata": "0",
-      "input-position": "top", theme: "light", lang: "es", loading: "lazy"
-    };
-    for (const [key, value] of Object.entries(attributes)) script.setAttribute(`data-${key}`, value);
-    script.crossOrigin = "anonymous";
-    script.onerror = () => {
-      script.remove();
-      $("giscus-pending").textContent = "No se pudieron cargar los comentarios. Comprueba la conexión y vuelve a abrir este panel.";
-      $("giscus-pending").hidden = false;
-    };
-    container.append(script);
   }
 
   function draw(time) {
@@ -770,7 +741,7 @@
   $("new-room").addEventListener("click", async () => { await leaveGame(); $("create-room").click(); });
   $("copy-link").addEventListener("click", copyInvite);
   $("start-game").addEventListener("click", startMatch);
-  for (const panel of ["players", "comments"]) $(`toggle-${panel}`).addEventListener("click", () => showDrawer(panel));
+  $("toggle-players").addEventListener("click", showDrawer);
   $("close-drawer").addEventListener("click", () => closeDrawer());
   $("drawer-backdrop").addEventListener("click", () => closeDrawer());
   const directions = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0], w: [0, -1], s: [0, 1], a: [-1, 0], d: [1, 0] };

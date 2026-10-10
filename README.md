@@ -2,7 +2,7 @@
 
 Minijuego para una clase de GitHub. Cada persona abre la misma página, entra con un código de sala y mueve su personaje con **WASD** o las **flechas**. Todos ven a los demás en un mapa compartido de **21 × 13 casillas**. Cada estrella recogida suma un punto; gana quien tenga más puntos cuando se acaba el tiempo.
 
-El sitio es estático: se publica en GitHub Pages con una sola carpeta y sin compilar nada. **Firebase Realtime Database** sincroniza posiciones, puntos, la salida de nuevas estrellas y el inicio de la partida. Los botones **Jugadores** y **Comentarios** abren un panel que se puede cerrar. **giscus** muestra comentarios del proyecto mediante GitHub Discussions y se conecta después de crear el repositorio. Los servicios se configuran una vez; luego el equipo trabaja en los archivos de personalización con ramas, pull requests y revisiones.
+El sitio es estático: se publica en GitHub Pages con una sola carpeta y sin compilar nada. **Firebase Realtime Database** sincroniza posiciones, puntos, la salida de nuevas estrellas y el inicio de la partida. El botón **Jugadores** abre un panel que se puede cerrar. Firebase se configura una vez; luego el equipo trabaja en los archivos de personalización con ramas, pull requests y revisiones.
 
 ## Prueba inmediata
 
@@ -38,17 +38,6 @@ La configuración web de Firebase identifica el proyecto, pero no protege los da
 
 Puedes usar **el mismo proyecto Firebase para varios equipos**: cada equipo crea una sala con un código diferente. No hace falta que cada estudiante cree una base de datos. Antes de la clase, publica una versión completa y probada para que todos partan del mismo proyecto.
 
-### Conectar los comentarios con giscus
-
-Hazlo **después de subir el proyecto a un repositorio público**. Los comentarios sirven para compartir ideas sobre el proyecto; la coordinación del equipo puede hacerse en GitHub durante el taller.
-
-1. En GitHub, abre **Settings → General → Features** y activa **Discussions** para el mismo repositorio donde publicaste el juego.
-2. Abre [giscus.app/es](https://giscus.app/es), escribe `usuario/repositorio`, autoriza la aplicación de giscus para ese repositorio si te lo pide y elige una categoría de Discussions, por ejemplo **General**.
-3. En el código que genera giscus, copia los valores de `data-repo`, `data-repo-id`, `data-category` y `data-category-id` en [`giscus-config.js`](giscus-config.js). Conserva las comillas y sube el cambio al repositorio.
-4. En la página publicada, abre **Comentarios**. La primera persona que escriba deberá iniciar sesión con GitHub. Esos comentarios aparecen en Discussions y son del proyecto completo, no de una sala específica.
-
-Si todavía no conectas giscus, el botón **Comentarios** muestra un aviso y el resto del juego funciona normalmente.
-
 ## Archivos para el taller
 
 | Archivo | Para qué sirve |
@@ -56,7 +45,6 @@ Si todavía no conectas giscus, el botón **Comentarios** muestra un aviso y el 
 | `personalizar.js` | Título, mensajes y colores del juego. |
 | `styles.css` | Aspecto de los botones, tarjetas y página. |
 | `firebase-config.js` | Conexión a Firebase. Se prepara antes de clase. |
-| `giscus-config.js` | Conexión opcional de comentarios con GitHub Discussions. |
 | `firebase.rules.json` | Reglas que se pegan una vez en Firebase Console. |
 | `game.js` | Movimiento, salas y sincronización. Ya funciona. |
 

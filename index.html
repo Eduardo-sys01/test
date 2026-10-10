@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="styles.css">
   <script defer src="personalizar.js"></script>
   <script defer src="firebase-config.js"></script>
-  <script defer src="giscus-config.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/12.19.0/firebase-database-compat.js"></script>
@@ -70,7 +69,7 @@
     <section id="game" class="game" hidden>
       <div class="game-top">
         <div><p class="eyebrow">EN JUEGO</p><h1 id="room-heading">Sala <span id="room-label"></span></h1><p id="mode-label" class="mode-label"></p></div>
-        <div class="game-actions"><button id="toggle-players" class="button secondary" type="button" aria-controls="game-drawer" aria-expanded="false">Jugadores</button><button id="toggle-comments" class="button secondary" type="button" aria-controls="game-drawer" aria-expanded="false">Comentarios</button><button id="copy-link" class="button quiet" type="button">Copiar enlace</button><button id="leave-room" class="button quiet" type="button">Salir</button></div>
+        <div class="game-actions"><button id="toggle-players" class="button secondary" type="button" aria-controls="game-drawer" aria-expanded="false">Jugadores</button><button id="copy-link" class="button quiet" type="button">Copiar enlace</button><button id="leave-room" class="button quiet" type="button">Salir</button></div>
       </div>
       <div class="board-card card">
           <div class="board-head"><div><span class="live-dot"></span><strong id="status-label">Conectando…</strong></div><div class="board-metrics"><div class="timer"><span>TIEMPO</span><strong id="time-left">01:00</strong></div><div class="score"><span>TUS PUNTOS</span><strong id="score">0</strong></div></div></div>
@@ -88,7 +87,6 @@
   <aside id="game-drawer" class="game-drawer card" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
     <div class="drawer-head"><div><p class="eyebrow">CAZA ESTRELLAS</p><h2 id="drawer-title">Jugadores</h2></div><button id="close-drawer" class="drawer-close" type="button" aria-label="Cerrar panel">×</button></div>
     <div id="players-panel" class="drawer-panel"><div id="player-list" class="player-list"></div><div class="mission-box"><span class="mission-icon">✦</span><p id="mission-message">Consigue más estrellas que los demás.</p></div></div>
-    <div id="comments-panel" class="drawer-panel" hidden><p class="drawer-help">Ideas y comentarios del proyecto en GitHub Discussions.</p><div id="giscus-container" class="giscus-container"><p id="giscus-pending">Los comentarios estarán disponibles cuando se conecte el repositorio a giscus.</p></div></div>
   </aside>
   <footer class="wrap footer"><span>✦ CAZA ESTRELLAS</span></footer>
 </body>
