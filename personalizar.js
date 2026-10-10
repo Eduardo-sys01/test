@@ -6,6 +6,6 @@ window.PERSONALIZAR = {
   mensajeMision: "Consigue más estrellas que los demás.",
   mensajeFinal: "¡Tiempo!",
   colorEstrellas: "#ffe35b",
-  colorMapa: "#1d2648",
+  colorMapa: "#e5c07b",
   coloresJugadores: ["#ff6b57", "#78e4d5", "#b999ff", "#ffc266", "#81b7ff", "#d8f26a"]
 };
